@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spotify Callback</title>
+</head>
+<body>
+    <h2>Spotify Login Successful</h2>
+    <script type="text/javascript">
+        function handleToken() {
+            // Parse the URL fragment to get the access token
+            const hash = window.location.hash.substr(1);
+            const result = hash.split('&').reduce(function (res, item) {
+                const parts = item.split('=');
+                res[parts[0]] = parts[1];
+                return res;
+            }, {});
+
+            // Example: Store the access token in localStorage
+            if(result.access_token) {
+                localStorage.setItem('spotify_access_token', result.access_token);
+                // Redirect or handle the token as needed
+                window.location.href = '/choose'; // Adjust as necessary
+            }
+        }
+
+        // Run the function to handle the token when the page loads
+        handleToken();
+    </script>
+</body>
+</html>
